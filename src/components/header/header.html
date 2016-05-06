@@ -1,0 +1,29 @@
+<div class="row panel-heading order-panel">
+      <div id='title' style="display: inline;">
+          <span>Trader Desktop</span>
+      </div>
+    <div id='loggedInUser'>
+        <span ng-bind='vm.loggedUser'></span>
+        <a ui-sref='signout'>Sign Out</a>
+    </div>
+</div>
+<div class="row btn-panel">
+    <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3">
+        <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Trade</button>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3">
+        <button class="btn btn-default" ng-click='vm.deleteAllOrders()'>Delete All</button>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3">
+        <button class="btn btn-default" ng-click='vm.refresh()'>Refresh</button>
+    </div>
+    <div class="col-lg-7">
+
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+        <button class="btn active" style="width: 30px;" ng-class='tblSelected' ng-click='vm.showTabular()'><i class="fa fa-table"></i></button>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+        <button class="btn" style="width: 30px;" ng-class='chartSelected' ng-click='vm.showChart()'><i class="fa fa-bar-chart"></i></button>
+    </div>
+</div>

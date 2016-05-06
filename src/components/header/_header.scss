@@ -1,0 +1,124 @@
+
+.order-panel {
+    background-color: $panel-bg-color;
+    height: 35px;
+    border-color: #7d7d7d;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+
+}
+
+.btn-panel {
+    background-color: $panel-bg-color;
+    /* padding: 5px; */
+    padding-top: 5px;
+    height: 35px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.btn {
+    font-size: smaller;
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 0px;
+    width: 70px;
+    height: 25px;
+    padding: 0px;
+}
+
+.order-panel span {
+    color: #363636;
+}
+
+.order-panel span {
+    font-size: 16px;
+}
+
+#title{
+    position:relative;
+    top:-4px;
+}
+
+#loggedInUser span {
+    font-style: italic;
+}
+
+#loggedInUser a {
+    /* margin-left: 5px; */
+    color: #7e7eed;
+    font-size: 12px;
+    padding: 10px;
+}
+
+#loggedInUser {
+    float: right;
+    position: relative;
+    top: -4px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .btn-panel .col-lg-1:nth-child(1) {
+        margin-right: -14px;
+    }
+
+    .btn-panel .col-lg-1:nth-child(2) {
+        margin-left: -14px;
+        margin-right: -14px;
+    }
+
+    .btn-panel .col-lg-1:nth-child(3) {
+        margin-left: -14px;
+    }
+    .btn-panel .col-lg-1:nth-child(5) {
+        width: 3%;
+        margin-left: 184px;
+    }
+    .btn-panel .col-lg-1:nth-child(6) {
+        width: 3%;
+        margin-left: 4px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .order-panel span {
+        font-size: 14px;
+        margin-left: -12px;
+    }
+
+    #title{
+        top:0px;
+    }
+
+    #loggedInUser {
+        left: 9px;
+        top:0px;
+    }
+
+    #loggedInUser a {
+        margin-left: 4px;
+        padding: 0px;
+    }
+
+    .btn-panel .col-lg-1:nth-child(1) {
+        margin-left: -12px;
+    }
+
+    .btn-panel .col-lg-1:nth-child(2) {
+        margin-left: -3px;
+    }
+
+    .btn-panel .col-lg-1:nth-child(3) {
+        margin-left: -3px;
+    }
+    .btn-panel .col-lg-1:nth-child(5) {
+
+        margin-left: 9px;
+    }
+    .btn-panel .col-lg-1:nth-child(6) {
+
+        margin-left: 3px;
+    }
+}

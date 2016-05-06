@@ -1,0 +1,16 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body , form {
+    margin:0;
+    pading:0;
+}
+
+/* Remove border to delete the 1px line */
+.navbar-fixed-top {
+    border: 0;
+}
+
+/* Workaround for unwanted route changes due to empty href attributes - see http://angular-ui.github.io/bootstrap/ */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/*common style for all button*/
+

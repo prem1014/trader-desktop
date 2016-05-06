@@ -1,0 +1,33 @@
+<table class="table">
+    <thead>
+    <tr class="tbl-header">
+        <td>Id</td>
+        <td>Creation Time</td>
+        <td>Side</td>
+        <td>Symbol</td>
+        <td>Quantity</td>
+        <td>Placed</td>
+        <td>Executed</td>
+        <td>Limit Price</td>
+        <td>Priority</td>
+        <td>Status</td>
+        <td>Trader Id</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in orderedData">
+        <td>{{item.id}}</td>
+        <td>{{item.creationTime}}</td>
+        <td>{{item.side}}</td>
+        <td>{{item.symbol}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.quantityPlaced}}</td>
+        <td>{{item.quantityExecuted}}</td>
+        <td>{{item.limitPrice}}</td>
+        <td>{{item.priority}}</td>
+        <td>{{item.status}}</td>
+        <td>{{item.traderId}}</td>
+    </tr>
+    </tbody>
+    <tr></tr>
+</table>
