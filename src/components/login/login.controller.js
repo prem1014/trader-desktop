@@ -17,7 +17,7 @@
                 console.log('Server encountered error: ' + error);
             })
         //validate user credentiials
-        $scope.login = function () {
+        vm.login = function () {
             var user = _.find(vm.users, {'id': vm.selectedName});
 
             loginService.setCredentials(user.name,user.id);

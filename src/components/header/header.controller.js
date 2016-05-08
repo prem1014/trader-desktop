@@ -3,9 +3,9 @@
     angular.module('app.header', [])
         .controller('HeaderController', headerController)
 
-    headerController.$inject = ['$scope', '$rootScope', '$cookieStore', 'DashboardService', 'DataService'];
+    headerController.$inject = ['$scope', '$rootScope', '$cookieStore', 'DashboardService', 'DataService','ToolsService'];
 
-    function headerController($scope, $rootScope, $cookieStore, DashboardService, DataService) {
+    function headerController($scope, $rootScope, $cookieStore, DashboardService, DataService,ToolsService) {
         var vm = this;
 
         //toggle between chart and tabular view
@@ -48,20 +48,14 @@
 
         //show data in chart view
         function showChart() {
-            $rootScope.toggleGridChart = false;
-            $rootScope.TblSelected = '';
-            $rootScope.ChartSelected = 'toggleTblChartBtnColor';
-
-            $scope.$emit('showChart', true)
+           $scope.$emit('showChart', true)
+           //ToolsService.showChart();
         }
 
         //show data in tabular view
         function showTabular() {
-            $rootScope.toggleGridChart = true;
-            $rootScope.TblSelected = 'toggleTblChartBtnColor';
-            $rootScope.ChartSelected = '';
-
             $scope.$emit('showTable', true)
+           // ToolsService.showTabular();
         }
     }
 })();

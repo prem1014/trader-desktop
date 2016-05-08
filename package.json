@@ -21,6 +21,8 @@
     "connect-modrewrite": "^0.8.1",
     "cors": "^2.7.1",
     "express": "^4.13.0",
+    "gulp-install": "^0.6.0",
+    "gulp-load-plugins": "^1.2.2",
     "morgan": "^1.6.0"
   },
   "devDependencies": {
@@ -44,6 +46,7 @@
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^2.3.0",
     "gulp-inject": "^3.0.0",
+    "gulp-install": "^0.6.0",
     "gulp-jscs": "^3.0.1",
     "gulp-jshint": "^1.11.0",
     "gulp-load-plugins": "^1.0.0-rc.1",

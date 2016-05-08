@@ -4,24 +4,27 @@
 
         .controller('DashboardController', dashboardController);
 
-    dashboardController.$inject = ['$scope', '$rootScope', '$cookieStore', 'DashboardService', 'socket','logger'];
+    dashboardController.$inject =
+     ['$scope', '$rootScope', '$cookieStore',
+      'DashboardService', 'socket','ToolsService','logger'];
 
     /* @ngInject */
-    function dashboardController($scope, $rootScope, $cookieStore, DashboardService, socket, logger) {
+    function dashboardController($scope, $rootScope, $cookieStore, DashboardService, socket,ToolsService, logger) {
 
         var vm = this;
         //model initialization
         vm.orders = [];
         vm.isShowtable = true;
         vm.orders=DashboardService.traderObj.orders;
+       // vm.isShowChart=ToolsService.toolsObj.showChart;
+       // vm.isShowtable=ToolsService.toolsObj.showTable;
 
-        //get ordered data from server
-        getOrders();
-
+       init();
+       
         vm.getOrders = getOrders;
         vm.createOrders = createOrders;
 
-        $scope.$on('showChart', function (event, isShowChart) {
+       $scope.$on('showChart', function (event, isShowChart) {
             console.log(isShowChart);
             vm.isShowChart = isShowChart;
             vm.isShowtable = false;
@@ -31,6 +34,39 @@
             console.log(isShowTable);
             vm.isShowChart = false;
             vm.isShowtable = isShowTable;
+        });
+        
+        socket.on('orderCreatedEvent',function(order){
+                if(vm.orders!==undefined){
+                vm.orders.push
+                ({
+                    id: order.id,
+                    creationTime: order.creationTime,
+                    side: order.side,
+                    symbol: order.symbol,
+                    quantity: order.quantity,
+                    quantityPlaced: order.quantityPlaced,
+                    quantityExecuted: order.quantityExecuted,
+                    limitPrice: order.limitPrice,
+                    priority: order.priority,
+                    status: order.status,
+                    traderId: order.traderId
+                })
+            }
+            else {
+                 vm.orders=order;
+            }
+        });
+
+        socket.on('placementCreatedEvent',function(placedOrder){
+                vm.orders
+                .filter(function (order) {
+                    return order.id === placedOrder.orderId;
+                })
+                .map(function (order) {
+                    order.quantityPlaced += placedOrder.quantityPlaced;
+                    order.status = placedOrder.status;
+                });
         });
 
         socket.on('executionCreatedEvent', function (executedOrder) {
@@ -56,16 +92,18 @@
             })
         });
 
+        socket.on('allOrdersDeletedEvent',function(){
+            vm.orders.splice(0,service.traderObj.orders.length);
+        })
         //get ordered data from server
         function getOrders() {
-            DashboardService.getOrders()
-                .then(function () {
-                    vm.orders = DashboardService.traderObj.orders;
-                    console.log('Now orders are available from server');
-                })
-                .catch(function (error) {
-                    console.log('Server encountered error: ' + error);
-                })
+             DashboardService.getOrders()
+             .then(function(){
+                  vm.orders=DashboardService.traderObj.orders;
+             })
+             .catch(function(){
+                 logger.log('Server encountered error');
+             })
         }
 
         //creates new order
@@ -80,8 +118,10 @@
                 });
         }
 
-        function activate() {
+        function init() {
             logger.log('Activated Dashboard View');
+             //get ordered data from server
+             getOrders();
         }
     }
 })();

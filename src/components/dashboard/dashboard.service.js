@@ -86,11 +86,12 @@
         }
 
         function init() {
+            service.getOrders();
             service.getInstruments();
-            orderCreatedEvent();
-            placementCreated();
-           // executionCreated();
-            allOrdersDeleted();
+           // orderCreatedEvent();
+            //placementCreated();
+            //executionCreated();
+           // allOrdersDeleted();
         }
 
         function orderCreatedEvent() {
