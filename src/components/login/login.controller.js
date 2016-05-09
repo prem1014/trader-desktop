@@ -1,13 +1,13 @@
-'use strict';
 (function () {
-    angular.module('app.login',['ngCookies','app.api'])
-    .controller('LoginController', loginController);
+    'use strict';
+    angular.module('app.login', ['ngCookies', 'app.api'])
+        .controller('LoginController', loginController);
 
-    loginController.$inject = ['$scope','$location', 'loginService'];
+    loginController.$inject = ['$scope', '$location', 'loginService'];
 
-    function loginController($scope,$location, loginService) {
-        var vm=this;
-        
+    function loginController($scope, $location, loginService) {
+        var vm = this;
+
         loginService.getUsers()
             .then(function (users) {
                 vm.users = users;
@@ -20,7 +20,7 @@
         vm.login = function () {
             var user = _.find(vm.users, {'id': vm.selectedName});
 
-            loginService.setCredentials(user.name,user.id);
+            loginService.setCredentials(user.name, user.id);
 
             $location.path('dashboard');
         };

@@ -1,32 +1,37 @@
 (function () {
-    angular.module('chart', [])
-    .directive('barChart', barChart);
+    'use strict';
+    angular.module('app.dashboard.chart', [])
+        .directive('barChart', barChart);
 
-    barChart.$inject = ['$parse', 'DashboardService'];
+    function barChart() {
+        var directive = {};
+        directive.restrict = 'E';
+        directive.template = '<div id="chart"></div>';
+        directive.scope = {
+            chartData: '=data'
+        };
+        directive.link = linkFunction;
 
-    function barChart($parse, DashboardService) {
-        return {
-            restrict: 'E',
-            controller: 'ChartController',
-            scope: {
-                chartData: '=data'
-            },
-            template: '<div id="chart"></div>',
-            link: function (scope, element, attrs) {
-                plot(scope.chartData);
-            }
+        return directive;
+
+        function linkFunction(scope, element, attrs) {
+            scope.$on('ordersModified',function (event,orders) {
+                plotChart(orders);
+            })
+            plotChart(scope.chartData);
         }
-        function plot(orders) {
-            var totalorder = [], placed = [], executed = [];
+
+        function plotChart(orders) {
+            var totalOrder = [], placed = [], executed = [];
             orders.map(function (order, index) {
-                totalorder.push({ id: order.id, quantity: order.quantity });
-                placed.push({ id: order.id, quantityPlaced: order.quantityPlaced });
-                executed.push({ id: order.id, quantityExecuted: order.quantityExecuted });
+                totalOrder.push({id: order.id, quantity: order.quantity});
+                placed.push({id: order.id, quantityPlaced: order.quantityPlaced});
+                executed.push({id: order.id, quantityExecuted: order.quantityExecuted});
             });
 
             var trace1XData = [], trace1YData = [],
-            trace2XData = [], trace2YData = [],
-            trace3XData = [], trace3YData = [];
+                trace2XData = [], trace2YData = [],
+                trace3XData = [], trace3YData = [];
             executed.map(function (exeOrder, index) {
                 trace1XData[index] = exeOrder.quantityExecuted;
                 trace1YData[index] = exeOrder.id;
@@ -35,7 +40,7 @@
                 trace2XData[index] = placedOrder.quantityPlaced;
                 trace2YData[index] = placedOrder.id;
             })
-            totalorder.map(function (order, index) {
+            totalOrder.map(function (order, index) {
                 trace3XData[index] = order.quantity;
                 trace3YData[index] = order.id;
             })
@@ -85,4 +90,4 @@
             Plotly.newPlot('chart', data, layout);
         }
     }
-})();
+})()

@@ -1,0 +1,33 @@
+<table class="table">
+    <thead>
+    <tr class="tbl-header">
+        <td>Id</td>
+        <td class="s-hide-column">Creation Time</td>
+        <td>Side</td>
+        <td>Symbol</td>
+        <td>Quantity</td>
+        <td class="s-hide-column">Placed</td>
+        <td class="s-hide-column">Executed</td>
+        <td>Limit Price</td>
+        <td class="s-hide-column">Priority</td>
+        <td class="s-hide-column">Status</td>
+        <td class="s-hide-column">Trader Id</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in orderedData">
+        <td>{{item.id}}</td>
+        <td class="s-hide-column">{{item.creationTime}}</td>
+        <td>{{item.side}}</td>
+        <td>{{item.symbol}}</td>
+        <td>{{item.quantity}}</td>
+        <td class="s-hide-column">{{item.quantityPlaced}}</td>
+        <td class="s-hide-column">{{item.quantityExecuted}}</td>
+        <td>{{item.limitPrice}}</td>
+        <td class="s-hide-column">{{item.priority}}</td>
+        <td class="s-hide-column">{{item.status}}</td>
+        <td class="s-hide-column">{{item.traderId}}</td>
+    </tr>
+    </tbody>
+    <tr></tr>
+</table>

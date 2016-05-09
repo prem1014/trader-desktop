@@ -18,3 +18,8 @@
     background-color: #fff;
 }
 
+@media only screen and (max-width: 360px) {
+    .s-hide-column{
+        display: none;
+    }
+}

@@ -7,11 +7,11 @@
 
         // Features (listed alphabetically)
         'app.approot',
+        'app.constant',
         'app.socket',
         'app.dashboard',
         'app.topnav',
         'app.login',
-        'app.signout',
-        'chart'
+        'app.signout'
     ]);
 })();

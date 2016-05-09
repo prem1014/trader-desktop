@@ -6,7 +6,7 @@
     function customTable(){
         var directive={};
         directive.restrict='E';
-        directive.templateUrl='components/dashboard/table/table.html';
+        directive.templateUrl='components/table/table.html';
         directive.controller='TableController';
         directive.controllerAs='vm';
         directive.scope={
