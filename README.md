@@ -20,4 +20,4 @@ gulp serve-dev will serve up the Angular application in a browser window.
 Few Screenshots
 
 ### Login Screen
-(src/images/screenshot/login.png)
+![Trader Desktop](src/images/screenshot/login.png)
