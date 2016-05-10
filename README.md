@@ -21,3 +21,9 @@ Few Screenshots
 
 ### Login Screen
 ![Trader Desktop](src/images/screenshot/login.png)
+
+### Dashboard Tabular View
+![Trader Desktop](src/images/screenshot/dashboard-tabular.png)
+
+###  Dashboard Chart View
+![Trader Desktop](src/images/screenshot/dashboard-chart.png)
