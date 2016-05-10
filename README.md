@@ -19,5 +19,5 @@ npm install will install the required node libraries under node_modules. Also, i
 gulp serve-dev will serve up the Angular application in a browser window.
 Few Screenshots
 
-Login Screen
-(trader-desktop/src/images/screenshot/login.png)
+### Login Screen
+(src/images/screenshot/login.png)
