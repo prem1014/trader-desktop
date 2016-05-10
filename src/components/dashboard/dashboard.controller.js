@@ -29,6 +29,9 @@
             vm.isShowtable = isShowTable;
         });
 
+        $scope.$on('refreshedOrders',function (event,orders) {
+            vm.orders=orders;
+        })
         function orderCreatedEvent() {
             socket.on(ConstantService.eventType.orderCreated, onOrderCreated)
         }
@@ -44,30 +47,6 @@
         function allOrdersDeleted() {
             socket.on(ConstantService.eventType.orderDeleted, onAllOrdersDeleted)
         }
-
-
-        /*   socket.on('executionCreatedEvent', function (executedOrder) {
-
-         /*  vm.orders
-         .filter(function(order){
-         return order.id===executedOrder.orderId;
-         })
-         .map(function (order) {
-         order.quantityExecuted+=executedOrder.quantityExecuted;
-         order.status=executedOrder.status;
-         });
-
-         vm.orders.forEach(function (item, index, arr) {
-         if (item.id === executedOrder.orderId) {
-         arr[index].quantityExecuted += executedOrder.quantityExecuted;
-         arr[index].status = executedOrder.status;
-
-         $scope.$apply(function () {
-         vm.orders = arr;
-         })
-         }
-         })
-         });*/
 
         //get ordered data from server
         function getOrders() {

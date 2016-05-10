@@ -13,6 +13,7 @@
         vm.showChart = showChart;
         vm.showTabular = showTabular;
 
+        vm.getOrdersOnRefresh=getOrdersOnRefresh;
         vm.deleteAllOrders = deleteAllOrders;
        // vm.refresh = getLatestData;
 
@@ -24,10 +25,10 @@
             }
         }
 
-        function getLatestData() {
+        function getOrdersOnRefresh() {
             DataService.getOrders()
                 .then(function (orders) {
-                    DashboardService.traderObj.orders = orders;
+                   $scope.$emit('refreshedOrders',orders);
                 })
                 .catch(function (error) {
                     console.log('Server encountered error: ' + error);
