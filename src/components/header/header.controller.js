@@ -1,11 +1,14 @@
-'use strict';
+
 (function () {
+    'use strict';
     angular.module('app.header', [])
-        .controller('HeaderController', headerController)
+        .controller('HeaderController', headerController);
 
-    headerController.$inject = ['$scope', '$rootScope', '$cookieStore', 'DashboardService', 'DataService'];
+    headerController.$inject = ['$scope', '$http', '$cookieStore', 'DashboardService', 'DataService','logger'];
 
-    function headerController($scope, $rootScope, $cookieStore, DashboardService, DataService) {
+    function headerController($scope, $http, $cookieStore, DashboardService, DataService,logger) {
+        /* jshint validthis: true */
+
         var vm = this;
 
         //toggle between chart and tabular view
@@ -14,13 +17,13 @@
         vm.showTabular = showTabular;
 
         vm.getOrdersOnRefresh=getOrdersOnRefresh;
-        vm.deleteAllOrders = deleteAllOrders;
-       // vm.refresh = getLatestData;
+
+        // vm.refresh = getLatestData;
 
         getLoggedInUser();
 
         function getLoggedInUser() {
-            if ($cookieStore.get('globals') != undefined) {
+            if ($cookieStore.get('globals') !== undefined) {
                 vm.loggedUser = $cookieStore.get('globals').currentUser.traderName;
             }
         }
@@ -31,25 +34,16 @@
                    $scope.$emit('refreshedOrders',orders);
                 })
                 .catch(function (error) {
-                    console.log('Server encountered error: ' + error);
-                })
-        };
-
-        //delete all orders from server
-        function deleteAllOrders() {
-            DashboardService.deleteAllOrders()
-                .then(function (data) {
-                    console.log('All order deleted');
-                    alert('All order deleted');
-                })
-                .catch(function () {
-                    console.log('Server encountered error: ' + error);
-                })
+                    logger.log('Server encountered error: ' + error);
+                });
+            $http({method: 'GET', url: '/src/components/data/data.json'}).success(function (data) {
+                console.log(data);
+            })
         }
 
         //show data in chart view
         function showChart() {
-            $scope.$emit('showChart', true)
+            $scope.$emit('showChart', true);
             vm.tblSelected='';
             vm.chartSelected='active-btn';
         }

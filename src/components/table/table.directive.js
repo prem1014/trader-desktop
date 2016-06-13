@@ -1,5 +1,6 @@
-'use strict';
+
 (function () {
+    'use strict';
     angular.module('app.dashboard.table')
         .directive('customTable',customTable);
 
@@ -11,7 +12,7 @@
         directive.controllerAs='vm';
         directive.scope={
             orderedData:'=tableData'
-        }
+        };
         return directive;
     }
 })();

@@ -10,35 +10,18 @@
                                 <custom-table table-data=" vm.orders"></custom-table>
                             </div>
                             <div id='bar-chart' ng-if='vm.isShowChart'>
-                                <bar-chart data="vm.orders"></bar-chart>
+                                <bar-chart chart-data="vm.orders" id="chart"></bar-chart>
+                            </div>
+                            <div class="alert alert-info" ng-if="vm.isOrdersNotAvailable">
+                                <strong> Orders are not available, please create order.</strong>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="alert alert-success fade in" ng-if='toggleAlert'>
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Order created.</strong>
-            </div>
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Please enter nuber of order to create</h4>
-                        </div>
-                        <div class="modal-body">
-                            <input type="number" ng-model='noOfOrders' class="form-control"/>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" ng-click='vm.createOrders()'
-                                    data-dismiss="modal">Create
-                            </button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <prompt-box></prompt-box>
+            <confirm-box></confirm-box>
+            <alert-box></alert-box>
         </div>
     </div>
 </section>

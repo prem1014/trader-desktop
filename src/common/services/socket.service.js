@@ -1,4 +1,5 @@
 (function () {
+    'use strict';
     angular.module('app.socketService',[])
         .factory('SocketService',socketService);
 

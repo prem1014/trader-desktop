@@ -2,6 +2,7 @@
     'use strict';
     angular.module('app.constant',[])
         .factory('ConstantService',constantService)
+        .constant('_','_');
 
      function constantService() {
         var service={
@@ -11,7 +12,7 @@
                 orderExecuted:'executionCreatedEvent',
                 orderDeleted:'allOrdersDeletedEvent'
             }
-        }
+        };
 
          return service;
     }

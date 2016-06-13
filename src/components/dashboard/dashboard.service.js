@@ -3,11 +3,11 @@
     angular.module('app.dashboard')
         .factory('DashboardService', dashboardService);
 
-    dashboardService.$inject = ['$http','DataService'];
+    dashboardService.$inject = ['$http','DataService','logger'];
 
-    function dashboardService($http, DataService) {
+    function dashboardService($http, DataService,logger) {
 
-        var instruments, service, orders,
+        var service,
         instruments = [];
         service = {
             createOrders: createOrders,
@@ -20,8 +20,8 @@
 
         return service;
 
-        function createOrders(noOfOrder, traderId) {
-            return DataService.createOrders(generateOrderData(noOfOrder, traderId))
+        function createOrders(noOfOrder, traderId,inst) {
+            return DataService.createOrders(generateOrderData(noOfOrder, traderId,inst));
         }
 
         function getOrders() {
@@ -34,45 +34,38 @@
                     instruments = data;
                 })
                 .catch(function (error) {
-                    console.log('Server encountered error: ' + error);
-                })
+                    logger.log('Server encountered error: ' + error);
+                });
         }
 
         function deleteAllOrders() {
             return DataService.deleteAllOrders();
         }
 
-        function generateOrderData(noOfOrder, traderId) {
+        function generateOrderData(noOfOrder, traderId,intst) {
             var orderedData = [],
-                side,
-                symbol;
-
+                side=['Buy','Sell'],
+                sideIndex,
+                instrumentsIndex;
+            if(intst){
+                instruments=intst;
+            }
             for (var i = 0; i < noOfOrder; i++) {
-                if (i !== 0) {
-                    side = orderedData[i - 1].side;
-                    side = getSide(side);
-                }
-                else {
-                    side = 'Sell'
-                }
+
+                sideIndex=random(0,1);
+                instrumentsIndex=random(0,instruments.length-1);
                 orderedData.push
                 ({
-                    side: side, symbol: instruments[i].symbol, quantity: Math.floor(Math.random() * 1000 + 1),
+                    side: side[sideIndex], symbol: instruments[instrumentsIndex].symbol,
+                    quantity: Math.floor(Math.random() * 1000 + 1),
                     limitPrice: Math.random() * 100, traderId: traderId
-                })
+                });
             }
 
             return orderedData;
         }
-
-        function getSide(prevValue) {
-            var side = 'Buy';
-            if (prevValue === 'Sell' || undefined) {
-                return side;
-            }
-            else {
-                return side = 'Sell';
-            }
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
         function init() {

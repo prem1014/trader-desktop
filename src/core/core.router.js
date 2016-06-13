@@ -28,6 +28,6 @@
             .state('signout',{
                 url:'/',
                 controller:'SignOutController'
-            })
+            });
     }
 })();
